@@ -123,8 +123,8 @@ public class CodigoPostalController {
     }
 
     @PostMapping(path = "/backup")
-    public @ResponseBody String setBackup(){
-        codigoPostalRepository.saveAll(getBackup());
+    public @ResponseBody String setBackup(@RequestBody Iterable<CodigoPostalModel> backup){
+        codigoPostalRepository.saveAll(backup);
         return "Saved";
     }
 }
