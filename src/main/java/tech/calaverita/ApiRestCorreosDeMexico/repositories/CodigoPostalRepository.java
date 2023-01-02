@@ -32,6 +32,6 @@ public interface CodigoPostalRepository extends CrudRepository<CodigoPostalModel
     @Query("SELECT cp.dCodigo FROM CodigoPostalModel cp WHERE cp.dEstado = :cp")
     ArrayList<String> findCpBydState(String cp);
 
-    @Query("SELECT cp FROM CodigoPostalModel cp WHERE CAST(cp.dCodigo AS text) LIKE :cp%")
-    ArrayList<CodigoPostalModel> findCpByCoincidence(Integer cp);
+    @Query("SELECT cp.dCodigo FROM CodigoPostalModel cp WHERE CAST(cp.dCodigo AS text) LIKE :cp%")
+    ArrayList<Integer> findCpByCoincidence(Integer cp);
 }

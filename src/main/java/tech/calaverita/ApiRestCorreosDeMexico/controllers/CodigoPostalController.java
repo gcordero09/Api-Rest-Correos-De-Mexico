@@ -33,8 +33,8 @@ public class CodigoPostalController {
     @GetMapping(path = "/search-cp/{cp}")
     public @ResponseBody ArrayList<Integer> getCodigoPostalByLike(@PathVariable("cp") Integer cp) {
         HashSet<Integer> out = new HashSet<>();
-        for (CodigoPostalModel codigoPostalModel : codigoPostalRepository.findCpByCoincidence(cp)) {
-            out.add(codigoPostalModel.getDCodigo());
+        for (Integer codigoPostalModel : codigoPostalRepository.findCpByCoincidence(cp)) {
+            out.add(codigoPostalModel);
         }
         ArrayList<Integer> sort = new ArrayList<>(out);
         Collections.sort(sort);
@@ -115,11 +115,6 @@ public class CodigoPostalController {
         ArrayList<String> sort = new ArrayList<>(out);
         Collections.sort(sort);
         return sort;
-    }
-
-    @GetMapping(path = "/backup")
-    public @ResponseBody Iterable<CodigoPostalModel> getBackup(){
-        return codigoPostalRepository.findAll();
     }
 
     @PostMapping(path = "/backup")
