@@ -2,10 +2,7 @@ package tech.calaverita.ApiRestCorreosDeMexico.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import tech.calaverita.ApiRestCorreosDeMexico.models.CodigoPostalModel;
 import tech.calaverita.ApiRestCorreosDeMexico.repositories.CodigoPostalRepository;
 
@@ -118,5 +115,16 @@ public class CodigoPostalController {
         ArrayList<String> sort = new ArrayList<>(out);
         Collections.sort(sort);
         return sort;
+    }
+
+    @GetMapping(path = "/backup")
+    public @ResponseBody Iterable<CodigoPostalModel> getBackup(){
+        return codigoPostalRepository.findAll();
+    }
+
+    @PostMapping(path = "/backup")
+    public @ResponseBody String setBackup(){
+        codigoPostalRepository.saveAll(getBackup());
+        return "Saved";
     }
 }
